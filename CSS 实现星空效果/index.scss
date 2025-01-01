@@ -1,0 +1,61 @@
+$total: 1000;
+$duration: 400s;
+
+@function getShadows($n) {
+  $result: '#{random(100)}vw #{random(100)}vh 0 #fff';
+  @for $i from 2 through $n {
+    $result: '#{$result}, #{random(100)}vw #{random(100)}vh 0 #fff';
+  }
+  @return unquote($result);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(180deg, #000000, #001a33);
+}
+
+@for $i from 1 through 5 {
+  $total: floor($total / 2);
+  $duration: $duration / 2;
+  .layer#{$i} {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: #{$i}px;
+    height: #{$i}px;
+    border-radius: 50%;
+    box-shadow: getShadows($total);
+    animation: moveUp $duration linear infinite, flicker #{$i}s ease-in-out infinite;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 100vh;
+      width: inherit;
+      height: inherit;
+      box-shadow: inherit;
+      border-radius: inherit;
+    }
+  }
+}
+
+@keyframes moveUp {
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+/* 添加星星闪烁效果 */
+@keyframes flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}

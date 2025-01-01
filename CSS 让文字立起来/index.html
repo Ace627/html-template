@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>CSS 让文字立起来</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        padding: 16px;
+        background-color: #a5a6a7;
+      }
+      h1 {
+        position: relative;
+        margin-top: 128px;
+        color: #fff;
+        font-size: 120px;
+        font-weight: 700;
+        letter-spacing: 6px;
+      }
+      h1::after {
+        content: '当时只道是寻常';
+        position: absolute;
+        color: #000;
+        left: 0;
+        transform: translate(-55px, 32px) scaleY(0.5) skew(50deg);
+        z-index: -1;
+        filter: blur(3px);
+        -webkit-mask: linear-gradient(transparent, #000);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>当时只道是寻常</h1>
+  </body>
+</html>

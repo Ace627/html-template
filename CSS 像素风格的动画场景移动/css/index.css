@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  background-color: #f5f6f7;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  image-rendering: pixelated;
+  width: 100%;
+  height: 100vh;
+  background-size: 100%;
+  background-repeat: repeat-x;
+}
+
+.bg {
+  background-image: url('../img/bg.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.clouds {
+  width: 200%;
+  height: 50vh;
+  background-image: url('../img/clouds.webp');
+  background-size: auto 100%; /* 保持云图宽度自适应，确保图像比例不变 */
+  animation: move-x 16s steps(60) infinite, move-y 3s steps(2) infinite;
+}
+
+.clouds-front {
+  width: 200%;
+  height: 60vh;
+  background-image: url('../img/cloudsfront.webp');
+  background-size: auto 100%; /* 保持云图宽度自适应，确保图像比例不变 */
+  animation: move-x 8s steps(60) infinite, move-y 1s steps(2) infinite;
+}
+
+.beach {
+  bottom: 0;
+  height: 60vh;
+  background-image: url('../img/beach.webp');
+  background-size: contain;
+  background-position-y: bottom;
+  animation: move-x 15s steps(120) infinite;
+}
+
+.char {
+  --size: 64px;
+  --steps: 5;
+  left: 50px;
+  bottom: 20px;
+  width: var(--size);
+  height: calc(2 * var(--size));
+  background-image: url('../img/character.webp');
+  background-size: calc(var(--steps) * 100%);
+  background-repeat: no-repeat;
+  animation: char 1s steps(var(--steps)) infinite;
+}
+
+@keyframes move-x {
+  form {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -100%; /* 背景位置从 0 移动到 -100% */
+  }
+}
+
+@keyframes move-y {
+  form {
+    background-position-y: 50%;
+  }
+  to {
+    background-position-y: 64%;
+  }
+}
+
+@keyframes char {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: calc(calc(-1 * var(--steps) * var(--size)));
+  }
+}
