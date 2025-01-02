@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+body {
+  width: 100%;
+  background-color: #f5f6f7;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+/* 一级菜单容器 */
+.menu {
+  --menu-width: 1200px;
+  --menu-duration: 0.32s;
+  --menu-underline-width: calc(var(--menu-width) / 6);
+  --menu-item-height: 50px;
+  --menu-sub-item-height: 32px;
+  --menu-bg-color: #fff;
+  --menu-text-color: #3a3a3a;
+  --menu-hover-text-color: #ff0f23;
+  --menu-hover-bg-color: rgba(0, 0, 0, 0.06);
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  width: var(--menu-width);
+  height: var(--menu-item-height);
+  margin: 0 auto;
+  background-color: var(--menu-bg-color);
+}
+
+/* 菜单项通用 */
+.menu-item {
+  position: relative;
+  width: 100%;
+  height: var(--menu-item-height);
+  line-height: var(--menu-item-height);
+  transition: background-color var(--menu-duration);
+}
+/* 菜单项 hover 通用 */
+.menu-item:hover {
+  background-color: var(--menu-hover-bg-color);
+}
+.menu-item:hover .menu--popup {
+  transform: scaleY(1);
+}
+/* 菜单项内部 a 元素通用 */
+.menu-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: var(--menu-item-height);
+  text-align: center;
+  color: var(--menu-text-color);
+  transition: color var(--menu-duration) ease;
+}
+.menu-item a:hover {
+  color: var(--menu-hover-text-color);
+}
+
+/* 子级菜单容器 */
+.menu--popup {
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  background-color: var(--menu-bg-color);
+  box-shadow: 0 0 4px rgba(0, 21, 41, 0.08);
+  /* 让盒子先沿着 Y 轴缩放到 0 也就是隐藏起来 */
+  transform: scaleY(0);
+  /* 我们需要将盒子从上面滑动下来 设置一下缩放的中心点 设置到最上面的中间位置 */
+  transform-origin: 50% 0;
+  /* 设置过渡效果 */
+  transition: transform var(--menu-duration);
+}
+/* 子级菜单项 */
+.menu--popup .menu-item {
+  height: var(--menu-sub-item-height);
+  line-height: var(--menu-sub-item-height);
+  border-bottom: 1px solid #eaeaea;
+}
+/* 子级菜单项内部 a 元素 */
+.menu--popup .menu-item a {
+  height: var(--menu-sub-item-height);
+  line-height: var(--menu-sub-item-height);
+}
+
+/* 一级菜单的底部下划线 */
+.menu .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--menu-underline-width);
+  height: 6px;
+  border-radius: 6px 6px 0 0;
+  background-color: #ff0f23;
+  transition: all var(--menu-duration);
+  pointer-events: none;
+}
+
+.menu > li:nth-child(2):hover ~ .underline {
+  left: calc(var(--menu-underline-width) * 1);
+  background-color: darkorange;
+}
+.menu > li:nth-child(3):hover ~ .underline {
+  left: calc(var(--menu-underline-width) * 2);
+  background-color: darkblue;
+}
+.menu > li:nth-child(4):hover ~ .underline {
+  left: calc(var(--menu-underline-width) * 3);
+  background-color: darkcyan;
+}
+.menu > li:nth-child(5):hover ~ .underline {
+  left: calc(var(--menu-underline-width) * 4);
+  background-color: darkmagenta;
+}
+.menu > li:nth-child(6):hover ~ .underline {
+  left: calc(var(--menu-underline-width) * 5);
+  background-color: darkred;
+}
