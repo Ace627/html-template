@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HTML 等高列表自适应换行</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="ap-alert--warning">改变容器的宽度，就可以看到效果了</div>
+
+    <div class="auto-wrap-list"></div>
+
+    <script>
+      const total = 99
+      const autoWrapList = document.querySelector('.auto-wrap-list')
+
+      for (let i = 0; i < total; i++) {
+        const div = document.createElement('div')
+        div.classList.add('wrap-item', 'flex-center')
+        div.innerText = i + 1
+        autoWrapList.appendChild(div)
+      }
+    </script>
+  </body>
+</html>

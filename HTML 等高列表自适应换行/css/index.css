@@ -1,0 +1,34 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  --ap-gap: 16px; /* 列表项的间距 */
+  --ap-min-width: 300px; /* 列表项的最小宽度 与设计稿保持一致即可 */
+  margin: 0;
+  padding: var(--ap-gap);
+  background-color: #f5f6f7;
+}
+.auto-wrap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--ap-min-width), 1fr));
+  gap: var(--ap-gap);
+}
+.wrap-item {
+  height: 150px;
+  font-size: 64px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: teal;
+}
+.ap-alert--warning {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  padding: 8px 16px;
+  text-align: center;
+  color: #fff;
+  background-color: #2080f0;
+  border-radius: 4px;
+}
