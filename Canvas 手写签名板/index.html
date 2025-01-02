@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas 手写签名板</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>手写签名</h2>
+      <canvas id="signatureCanvas" width="800" height="300"></canvas>
+
+      <div class="controls">
+        <button id="clearButton">清除签名</button>
+        <button id="exportButton">导出签名</button>
+      </div>
+
+      <div class="controls">
+        <div class="range-wrapper">
+          <label for="brushSize" class="control-label">画笔粗细:</label>
+          <input type="range" id="brushSize" min="1" max="10" value="3" />
+        </div>
+        <div class="color-wrapper">
+          <label for="colorPicker" class="control-label">画笔颜色:</label>
+          <input type="color" id="colorPicker" value="#000000" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById('signatureCanvas')
+      const ctx = canvas.getContext('2d')
+
+      // 设置初始画笔参数
+      ctx.strokeStyle = '#000'
+      ctx.lineWidth = 3
+      ctx.lineJoin = 'round'
+      ctx.lineCap = 'round'
+
+      let isDrawing = false
+      let points = []
+
+      // 获取鼠标/触摸位置
+      function getPosition(e) {
+        const rect = canvas.getBoundingClientRect() // 获取canvas相对于视口的位置
+        let x, y
+
+        if (e.touches && e.touches.length) {
+          x = e.touches[0].clientX - rect.left // 使用rect.left来确保位置准确
+          y = e.touches[0].clientY - rect.top // 使用rect.top来确保位置准确
+        } else {
+          // 对于鼠标事件
+          x = e.clientX - rect.left
+          y = e.clientY - rect.top
+        }
+
+        // 适配屏幕缩放，考虑触摸设备的缩放问题
+        const scaleX = canvas.width / rect.width
+        const scaleY = canvas.height / rect.height
+        x = (x - window.scrollX) * scaleX
+        y = (y - window.scrollY) * scaleY
+
+        return { x, y }
+      }
+
+      // 检查鼠标/触摸位置是否在画布内
+      function isInCanvas(e) {
+        const rect = canvas.getBoundingClientRect()
+        const x = e.clientX || e.touches[0].clientX
+        const y = e.clientY || e.touches[0].clientY
+        return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom
+      }
+
+      // 开始绘制
+      function startDrawing(e) {
+        if (!isInCanvas(e)) return
+        isDrawing = true
+        const position = getPosition(e)
+        points.push(position)
+      }
+
+      // 绘制
+      function draw(e) {
+        if (!isDrawing || !isInCanvas(e)) return
+        const position = getPosition(e)
+        points.push(position)
+
+        ctx.beginPath()
+        ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y)
+        ctx.lineTo(position.x, position.y)
+        ctx.stroke()
+      }
+
+      // 停止绘制
+      function stopDrawing() {
+        isDrawing = false
+        points = [] // 清空上次绘制的路径
+      }
+
+      // 监听鼠标事件
+      canvas.addEventListener('mousedown', startDrawing)
+      canvas.addEventListener('mousemove', draw)
+      canvas.addEventListener('mouseup', stopDrawing)
+      canvas.addEventListener('mouseleave', stopDrawing) // 鼠标离开时停止绘制
+
+      // 监听触摸事件
+      canvas.addEventListener('touchstart', startDrawing)
+      canvas.addEventListener('touchmove', draw)
+      canvas.addEventListener('touchend', stopDrawing)
+      canvas.addEventListener('touchcancel', stopDrawing) // 触摸取消时停止绘制
+
+      // 清除按钮
+      document.getElementById('clearButton').addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        points = [] // 清空记录的签名路径
+      })
+
+      // 导出签名按钮
+      document.getElementById('exportButton').addEventListener('click', () => {
+        const dataURL = canvas.toDataURL('image/png') // 获取签名图片的 DataURL
+        const link = document.createElement('a')
+        link.href = dataURL
+        link.download = 'signature.png' // 下载文件名
+        link.click() // 模拟点击链接以下载图片
+      })
+
+      // 设置画笔粗细
+      document.getElementById('brushSize').addEventListener('input', (e) => {
+        ctx.lineWidth = e.target.value
+      })
+
+      // 设置画笔颜色
+      document.getElementById('colorPicker').addEventListener('input', (e) => {
+        ctx.strokeStyle = e.target.value
+      })
+    </script>
+  </body>
+</html>
