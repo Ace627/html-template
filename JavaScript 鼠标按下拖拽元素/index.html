@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>JavaScript 鼠标按下拖拽元素</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 16px;
+        height: 100vh;
+        background-color: #262935;
+        overflow: hidden;
+        /* transform: scale(0.6); */
+      }
+      .ap-alert--warning {
+        margin: 32px 0;
+        padding: 8px 16px;
+        font-size: 14px;
+        color: #2080f0;
+        background-color: #e9f2fe;
+        border-radius: 4px;
+      }
+      .wrapper {
+        position: relative;
+        width: 90vmin;
+        height: 80vmin;
+        background-color: #fff;
+        box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+      }
+      .box {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+      }
+      .box--primary {
+        background-color: #409eff;
+      }
+      .box--danger {
+        right: 0;
+        background-color: #f56c6c;
+      }
+      .box--success {
+        bottom: 0;
+        background-color: #67c23a;
+      }
+      .box--warning {
+        right: 0;
+        bottom: 0;
+        background-color: #e6a23c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ap-alert--warning">被推拽元素，与其父元素，须保持子绝父相，或子绝父绝。</div>
+    <div class="wrapper">
+      <div class="box box--primary"></div>
+      <div class="box box--danger"></div>
+      <div class="box box--success"></div>
+      <div class="box box--warning"></div>
+    </div>
+
+    <script>
+      function dragElement(el) {
+        el.onmousedown = event => {
+          const parentElement = el.parentElement
+          event.preventDefault() // 防止选中拖拽导致触发浏览器的搜索事件
+          const boxX = event.clientX - el.offsetLeft // 获取鼠标与拖拽盒子的偏移量（确保鼠标一直在点击盒子时的位置）
+          const boxY = event.clientY - el.offsetTop
+          const maxX = parentElement.offsetWidth - el.offsetWidth // 计算极限偏移量
+          const maxY = parentElement.offsetHeight - el.offsetHeight
+          const originCursor = el.style.cursor // 获取拖拽元素的初始样式
+          el.style.cursor = 'move'
+          document.onmousemove = event => {
+            const mouseX = event.clientX // 获取鼠标当前的位置
+            const mouseY = event.clientY
+            let moveX = mouseX - boxX // 计算被拖拽盒子的偏移量
+            let moveY = mouseY - boxY
+            moveX < 0 && (moveX = 0) // 限制盒子的推拽范围
+            moveY < 0 && (moveY = 0)
+            moveX > maxX && (moveX = maxX)
+            moveY > maxY && (moveY = maxY)
+            el.style.left = moveX + 'px' // 赋予待拖拽的盒子新位置
+            el.style.top = moveY + 'px'
+
+            // 显示基于父容器的坐标 左上角为原点
+            el.innerText = `${moveX}, ${moveY}`
+          }
+          document.onmouseup = event => {
+            document.onmousemove = null
+            document.onmouseup = null
+            el.style.cursor = originCursor
+          }
+        }
+      }
+
+      document.querySelectorAll('.box').forEach(el => dragElement(el))
+    </script>
+  </body>
+</html>
