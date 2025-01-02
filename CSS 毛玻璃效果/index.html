@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CSS 毛玻璃效果</title>
+    <style>
+      /* 使子元素垂直水平居中 */
+      .flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        background-image: url('https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/176/176-bigskin-3.jpg');
+        background-size: cover;
+      }
+      .frosted-glass {
+        width: 92vmin;
+        height: 30vmin;
+        backdrop-filter: blur(6px);
+        border-radius: 10px;
+        border: 1px dashed #fff;
+      }
+      .frosted-glass:hover {
+        cursor: pointer;
+      }
+      .frosted-glass__content {
+        font-size: 6vmin;
+        letter-spacing: 2px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body class="flex-center">
+    <div class="frosted-glass flex-center">
+      <div class="frosted-glass__content">杨玉环-遇见飞天</div>
+    </div>
+  </body>
+</html>
