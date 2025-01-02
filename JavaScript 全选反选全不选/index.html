@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>JavaScript 全选反选全不选</title>
+    <style>
+      body {
+        background-color: #f5f6f7;
+      }
+      .select-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      button ~ button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="select-container">
+      <form action="" class="mb-16px">
+        <p><input type="checkbox" /> 报君黄金台上意，提携玉龙为君死。</p>
+        <p><input type="checkbox" /> 但使龙城飞将在，不叫胡马渡阴山。</p>
+        <p><input type="checkbox" /> 凭君莫话封侯事，一将功成万骨枯。</p>
+        <p><input type="checkbox" /> 醉卧沙场君莫笑，古来征战几人回。</p>
+        <p><input type="checkbox" /> 为有牺牲多壮志，敢教日月换新天。</p>
+        <p><input type="checkbox" /> 此去黄泉招旧部，旌旗十万斩阎罗。</p>
+        <p><input type="checkbox" /> 仰天大笑出门去，吾辈岂是蓬蒿人。</p>
+        <p><input type="checkbox" /> 黄沙百战穿金甲，不破楼兰终不还。</p>
+        <p><input type="checkbox" /> 子规夜半犹啼血，不信东风唤不回。</p>
+        <p><input type="checkbox" /> 男儿何不带吴钩，收取关山五十州？</p>
+      </form>
+
+      <div>
+        <button onclick="handleCheckAll()">全选</button>
+        <button onclick="handleCheckReverse()">反选</button>
+        <button onclick="handleCheckNone()">全不选</button>
+      </div>
+    </div>
+
+    <script>
+      // 获取所有的复选框节点
+      const checkboxList = document.querySelectorAll("input[type='checkbox']")
+
+      // 处理全选事件
+      function handleCheckAll() {
+        checkboxList.forEach((el) => (el.checked = true))
+      }
+
+      // 处理反选事件
+      function handleCheckReverse() {
+        checkboxList.forEach((el) => (el.checked = !el.checked))
+      }
+
+      // 处理全不选事件
+      function handleCheckNone() {
+        checkboxList.forEach((el) => (el.checked = false))
+      }
+    </script>
+  </body>
+</html>
