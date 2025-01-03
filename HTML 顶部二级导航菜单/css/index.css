@@ -1,129 +1,142 @@
+/* 通用样式 */
 * {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
+  margin: 0; /* 清除所有元素的外边距 */
+  padding: 0; /* 清除所有元素的内边距 */
+  list-style: none; /* 去掉无序列表的默认样式 */
+  text-decoration: none; /* 去掉链接的下划线 */
 }
 
+/* body 样式 */
 body {
-  width: 100%;
-  background-color: #f5f6f7;
+  width: 100%; /* 设置 body 的宽度为 100% */
+  background-color: #f5f6f7; /* 设置页面背景颜色 */
 }
 
+/* 固定头部 */
 .fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  position: fixed; /* 使头部固定在页面顶部 */
+  top: 0; /* 距离顶部 0px */
+  right: 0; /* 距离右侧 0px */
+  width: 100%; /* 宽度占满整个页面 */
+  background-color: #fff; /* 设置背景颜色为白色 */
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08); /* 添加阴影效果 */
 }
 
 /* 一级菜单容器 */
 .menu {
-  --menu-width: 1200px;
-  --menu-duration: 0.32s;
-  --menu-underline-width: calc(var(--menu-width) / 6);
-  --menu-item-height: 50px;
-  --menu-sub-item-height: 32px;
-  --menu-bg-color: #fff;
-  --menu-text-color: #3a3a3a;
-  --menu-hover-text-color: #ff0f23;
-  --menu-hover-bg-color: rgba(0, 0, 0, 0.06);
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  width: var(--menu-width);
-  height: var(--menu-item-height);
-  margin: 0 auto;
-  background-color: var(--menu-bg-color);
+  --menu-width: 1200px; /* 设置菜单容器宽度 */
+  --menu-duration: 0.32s; /* 设置菜单动画持续时间 */
+  --menu-underline-width: calc(var(--menu-width) / 6); /* 设置菜单项下划线的宽度 */
+  --menu-item-height: 50px; /* 设置菜单项的高度 */
+  --menu-sub-item-height: 32px; /* 设置子级菜单项的高度 */
+  --menu-bg-color: #fff; /* 设置菜单背景颜色 */
+  --menu-text-color: #3a3a3a; /* 设置菜单文本颜色 */
+  --menu-hover-text-color: #ff0f23; /* 设置菜单项 hover 时的文本颜色 */
+  --menu-hover-bg-color: rgba(0, 0, 0, 0.06); /* 设置菜单项 hover 时的背景色 */
+  position: relative; /* 设置为相对定位，以便子元素使用绝对定位 */
+  display: flex; /* 使用 flexbox 布局 */
+  justify-content: space-around; /* 子元素水平分布 */
+  width: var(--menu-width); /* 使用自定义宽度 */
+  height: var(--menu-item-height); /* 使用自定义高度 */
+  margin: 0 auto; /* 水平居中 */
+  background-color: var(--menu-bg-color); /* 使用自定义背景颜色 */
 }
 
-/* 菜单项通用 */
+/* 菜单项样式 */
 .menu-item {
-  position: relative;
-  width: 100%;
-  height: var(--menu-item-height);
-  line-height: var(--menu-item-height);
-  transition: background-color var(--menu-duration);
+  position: relative; /* 使子菜单能根据此容器定位 */
+  width: 100%; /* 宽度占满整个容器 */
+  height: var(--menu-item-height); /* 使用自定义高度 */
+  line-height: var(--menu-item-height); /* 设置文本垂直居中 */
+  transition: background-color var(--menu-duration); /* 设置背景颜色的过渡效果 */
 }
-/* 菜单项 hover 通用 */
+
+/* 菜单项 hover 样式 */
 .menu-item:hover {
-  background-color: var(--menu-hover-bg-color);
+  background-color: var(--menu-hover-bg-color); /* 设置 hover 时的背景色 */
 }
+
+/* 菜单项 hover 时子级菜单动画 */
 .menu-item:hover .menu--popup {
-  transform: scaleY(1);
+  transform: scaleY(1); /* 显示子级菜单，使用 scaleY 缩放效果 */
 }
-/* 菜单项内部 a 元素通用 */
+
+/* 菜单项内部链接样式 */
 .menu-item a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  line-height: var(--menu-item-height);
-  text-align: center;
-  color: var(--menu-text-color);
-  transition: color var(--menu-duration) ease;
+  display: block; /* 使链接成为块级元素 */
+  width: 100%; /* 宽度占满菜单项 */
+  height: 100%; /* 高度占满菜单项 */
+  line-height: var(--menu-item-height); /* 设置文本垂直居中 */
+  text-align: center; /* 水平居中 */
+  color: var(--menu-text-color); /* 设置文本颜色 */
+  transition: color var(--menu-duration) ease; /* 设置文本颜色的过渡效果 */
 }
+
+/* 菜单项链接 hover 样式 */
 .menu-item a:hover {
-  color: var(--menu-hover-text-color);
+  color: var(--menu-hover-text-color); /* 设置 hover 时的文本颜色 */
 }
 
 /* 子级菜单容器 */
 .menu--popup {
-  position: relative;
-  z-index: -1;
-  width: 100%;
-  background-color: var(--menu-bg-color);
-  box-shadow: 0 0 4px rgba(0, 21, 41, 0.08);
-  /* 让盒子先沿着 Y 轴缩放到 0 也就是隐藏起来 */
-  transform: scaleY(0);
-  /* 我们需要将盒子从上面滑动下来 设置一下缩放的中心点 设置到最上面的中间位置 */
-  transform-origin: 50% 0;
-  /* 设置过渡效果 */
-  transition: transform var(--menu-duration);
+  position: relative; /* 使子级菜单容器可以定位 */
+  z-index: -1; /* 设置 z-index 为负数，避免遮挡其他元素 */
+  width: 100%; /* 宽度占满父容器 */
+  background-color: var(--menu-bg-color); /* 设置子级菜单背景颜色 */
+  box-shadow: 0 0 4px rgba(0, 21, 41, 0.08); /* 设置阴影效果 */
+  transform: scaleY(0); /* 初始状态下子级菜单不可见 */
+  transform-origin: 50% 0; /* 设置子级菜单缩放原点为顶部中间 */
+  transition: transform var(--menu-duration); /* 设置缩放动画的过渡效果 */
 }
-/* 子级菜单项 */
+
+/* 子级菜单项样式 */
 .menu--popup .menu-item {
-  height: var(--menu-sub-item-height);
-  line-height: var(--menu-sub-item-height);
-  border-bottom: 1px solid #eaeaea;
+  height: var(--menu-sub-item-height); /* 使用自定义子级菜单项高度 */
+  line-height: var(--menu-sub-item-height); /* 设置文本垂直居中 */
+  border-bottom: 1px solid #eaeaea; /* 设置子级菜单项的底部边框 */
 }
-/* 子级菜单项内部 a 元素 */
+
+/* 子级菜单项内部链接样式 */
 .menu--popup .menu-item a {
-  height: var(--menu-sub-item-height);
-  line-height: var(--menu-sub-item-height);
+  height: var(--menu-sub-item-height); /* 设置子级菜单项链接高度 */
+  line-height: var(--menu-sub-item-height); /* 设置文本垂直居中 */
 }
 
-/* 一级菜单的底部下划线 */
+/* 一级菜单底部下划线样式 */
 .menu .underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: var(--menu-underline-width);
-  height: 6px;
-  border-radius: 6px 6px 0 0;
-  background-color: #ff0f23;
-  transition: all var(--menu-duration);
-  pointer-events: none;
+  position: absolute; /* 使用绝对定位 */
+  bottom: 0; /* 距离底部 0px */
+  left: 0; /* 距离左侧 0px */
+  width: var(--menu-underline-width); /* 设置下划线宽度 */
+  height: 6px; /* 设置下划线高度 */
+  border-radius: 6px 6px 0 0; /* 设置下划线圆角 */
+  background-color: #ff0f23; /* 设置下划线的背景颜色 */
+  transition: all var(--menu-duration); /* 设置下划线所有属性的过渡动画 */
+  pointer-events: none; /* 禁止与下划线的交互 */
 }
 
+/* 一级菜单项 hover 时，改变下划线的位置和颜色 */
 .menu > li:nth-child(2):hover ~ .underline {
-  left: calc(var(--menu-underline-width) * 1);
-  background-color: darkorange;
+  left: calc(var(--menu-underline-width) * 1); /* 根据菜单项的顺序调整下划线的位置 */
+  background-color: darkorange; /* 改变下划线的颜色 */
 }
+
 .menu > li:nth-child(3):hover ~ .underline {
-  left: calc(var(--menu-underline-width) * 2);
-  background-color: darkblue;
+  left: calc(var(--menu-underline-width) * 2); /* 调整位置 */
+  background-color: darkblue; /* 改变颜色 */
 }
+
 .menu > li:nth-child(4):hover ~ .underline {
-  left: calc(var(--menu-underline-width) * 3);
-  background-color: darkcyan;
+  left: calc(var(--menu-underline-width) * 3); /* 调整位置 */
+  background-color: darkcyan; /* 改变颜色 */
 }
+
 .menu > li:nth-child(5):hover ~ .underline {
-  left: calc(var(--menu-underline-width) * 4);
-  background-color: darkmagenta;
+  left: calc(var(--menu-underline-width) * 4); /* 调整位置 */
+  background-color: darkmagenta; /* 改变颜色 */
 }
+
 .menu > li:nth-child(6):hover ~ .underline {
-  left: calc(var(--menu-underline-width) * 5);
-  background-color: darkred;
+  left: calc(var(--menu-underline-width) * 5); /* 调整位置 */
+  background-color: darkred; /* 改变颜色 */
 }

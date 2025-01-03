@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <!-- 设置文档字符编码为 UTF-8，支持中文字符 -->
     <meta charset="UTF-8" />
-    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <!-- 为 Internet Explorer (IE) 浏览器设置最高的渲染级别，使其以最新的方式呈现页面 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <!-- 配置视口，使页面适应不同设备宽度，禁用缩放功能，以确保页面宽度和设备宽度一致 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- 设置页面标题 -->
     <title>HTML 顶部二级导航菜单</title>
+    <!-- 引入外部 CSS 文件，设置页面样式 -->
     <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
+    <!-- 固定头部容器，通常用于页面的顶部导航栏 -->
     <div class="fixed-header">
+      <!-- 菜单容器 -->
       <ul class="menu">
+        <!-- 第一个菜单项：首页 -->
         <li class="menu-item"><a href="#">首页</a></li>
 
+        <!-- 第二个菜单项：项目案例，包含二级下拉菜单 -->
         <li class="menu-item">
           <a href="#">项目案例</a>
+          <!-- 二级菜单容器 -->
           <ul class="menu--popup">
             <li class="menu-item"><a href="#">二级菜单</a></li>
             <li class="menu-item"><a href="#">二级菜单</a></li>
@@ -26,8 +33,10 @@
           </ul>
         </li>
 
+        <!-- 第三个菜单项：多级菜单，包含二级下拉菜单 -->
         <li class="menu-item">
           <a href="#">多级菜单</a>
+          <!-- 二级菜单容器 -->
           <ul class="menu--popup">
             <li class="menu-item"><a href="#">二级菜单</a></li>
             <li class="menu-item"><a href="#">二级菜单</a></li>
@@ -36,8 +45,10 @@
           </ul>
         </li>
 
+        <!-- 第四个菜单项：朝花夕拾，包含二级下拉菜单 -->
         <li class="menu-item">
           <a href="#">朝花夕拾</a>
+          <!-- 二级菜单容器 -->
           <ul class="menu--popup">
             <li class="menu-item"><a href="#">二级菜单</a></li>
             <li class="menu-item"><a href="#">二级菜单</a></li>
@@ -47,8 +58,10 @@
           </ul>
         </li>
 
+        <!-- 第五个菜单项：开发文档，包含二级下拉菜单 -->
         <li class="menu-item">
           <a href="#">开发文档</a>
+          <!-- 二级菜单容器 -->
           <ul class="menu--popup">
             <li class="menu-item"><a href="#">二级菜单</a></li>
             <li class="menu-item"><a href="#">二级菜单</a></li>
@@ -58,11 +71,12 @@
           </ul>
         </li>
 
+        <!-- 第六个菜单项：关于，无二级菜单 -->
         <li class="menu-item">
           <a href="#">关于</a>
         </li>
 
-        <!-- 定义滑动的线条 -->
+        <!-- 自定义的滑动下划线，用于菜单项 hover 时显示下划线效果 -->
         <li class="underline"></li>
       </ul>
     </div>
