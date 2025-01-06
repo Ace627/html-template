@@ -2,7 +2,7 @@
 
 - 具体的 HTML + CSS 小案例都放在 demo 目录
 - 根目录的 index.html 只是为了使用 GitHub 的静态部署
-- [在线预览](https://ace627.github.io/html-template)
+- [在线预览](https://ace627.github.io/html-template) | [编辑器模式查看项目](https://github.dev/Ace627/html-template)
 
 ## 常用网站
 
