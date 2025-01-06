@@ -1,76 +1,156 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo 案例导航</title>
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
       body {
-        background-color: #d9d9d9;
+        font-family: 'Arial', sans-serif;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
       }
-      .nav-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
-        padding: 16px;
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #007bff;
+        margin-bottom: 20px;
       }
-      .nav-list .nav-item {
+
+      .category-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 8px 16px;
-        font-size: 12px;
-        color: #006fff;
-        background-color: #fff;
-        border-radius: 6px;
-        border: 1px solid #dcdfe6;
-        text-decoration: none;
-        transition: all 0.1s;
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 20px;
       }
-      .nav-list .nav-item:hover {
-        color: color-mix(in srgb, #006fff, #fff 32%);
-        text-decoration: underline;
+
+      .category {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+      }
+
+      .category h2 {
+        color: #007bff;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .case-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        margin: 0;
+      }
+
+      .case-list li {
+        margin: 0;
+      }
+
+      .case-list a {
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .case-list a:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+
+      .case-list a:active {
+        transform: translateY(1px);
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .category h2 {
+          font-size: 1.6rem;
+        }
+
+        .case-list {
+          overflow-x: scroll;
+          flex-wrap: nowrap;
+        }
+
+        .case-list a {
+          font-size: 1rem;
+          padding: 8px 12px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="nav-list"></div>
+    <h1>Demo 案例导航</h1>
+
+    <!-- 动态生成的分类和案例内容 -->
+    <div id="categories" class="category-container"></div>
 
     <script>
-      const demoNameList = [
-        'Canvas 动态时钟效果',
-        'Canvas 手写签名板',
-        'CSS 像素风格的动画场景移动',
-        'CSS 实现星空效果',
-        'CSS 旋转太极图',
-        'CSS 毛玻璃效果',
-        'CSS 蒙娜丽莎的微笑',
-        'CSS 让文字立起来',
-        'HTML Jeecg 版首屏加载页',
-        'HTML 仿京东左侧导航条',
-        'HTML 等高列表自适应换行',
-        'HTML 简约卡通风格的 404 页面',
-        'HTML 若依版首屏加载页',
-        'HTML 顶部二级导航菜单',
-        'JavaScript UUID 生成器',
-        'JavaScript 全选反选全不选',
-        'JavaScript 鼠标按下拖拽元素',
-      ]
+      // 使用 fetch 从 JSON 文件加载数据
+      fetch('database/navs.json')
+        .then((response) => response.json()) // 将响应转化为 JSON
+        .then((data) => {
+          const dirNameList = data // 假设 navs.json 中包含一个目录名称的数组
 
-      const itemList = demoNameList.reduce(
-        (prev, item) =>
-          (prev += `
-        <a href="./demo/${item}/index.html" class="nav-item" target="_blank">${item}</a>`),
-        '',
-      )
+          // 分类归档
+          const categories = {}
 
-      document.querySelector('.nav-list').innerHTML = itemList
+          dirNameList.forEach((item) => {
+            const [category, ...caseNameArr] = item.split(' ')
+            const caseName = caseNameArr.join(' ') // 处理文件名（去掉空格后部分）
+            if (!categories[category]) {
+              categories[category] = []
+            }
+            categories[category].push(caseName)
+          })
+
+          // 生成横排导航页面
+          const categoriesContainer = document.getElementById('categories')
+
+          for (const category in categories) {
+            const categoryDiv = document.createElement('div')
+            categoryDiv.classList.add('category')
+
+            const categoryTitle = document.createElement('h2')
+            categoryTitle.innerText = category
+            categoryDiv.appendChild(categoryTitle)
+
+            const caseList = document.createElement('ul')
+            caseList.classList.add('case-list')
+
+            categories[category].forEach((caseName) => {
+              const listItem = document.createElement('li')
+              const caseLink = document.createElement('a')
+              // 设置链接指向相应的案例页面
+              caseLink.href = `./demo/${category} ${caseName}/index.html`
+              caseLink.target = '_blank' // 在新窗口中打开
+              caseLink.innerText = caseName
+              listItem.appendChild(caseLink)
+              caseList.appendChild(listItem)
+            })
+
+            categoryDiv.appendChild(caseList)
+            categoriesContainer.appendChild(categoryDiv)
+          }
+        })
+        .catch((error) => {
+          console.error('加载数据失败:', error)
+        })
     </script>
   </body>
 </html>
