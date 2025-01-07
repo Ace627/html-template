@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas 黑客帝国代码雨</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        background-color: #000;
+        font-family: Arial, sans-serif;
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 控制面板样式 */
+      .controls {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        color: #fff;
+        font-size: 14px;
+        opacity: 0; /* 默认隐藏 */
+        transition: opacity 0.3s ease-in-out; /* 平滑过渡 */
+        width: 250px;
+      }
+
+      /* 当鼠标悬浮到控制面板区域时显示 */
+      .controls:hover {
+        opacity: 1;
+      }
+
+      .controls label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        align-items: center;
+      }
+
+      .controls input,
+      .controls select {
+        margin-left: 10px;
+        flex: 1;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .controls input[type='range'] {
+        width: 70%;
+      }
+
+      .controls input[type='color'],
+      .controls select {
+        width: 30%;
+      }
+
+      .controls .range-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* 增加控制面板的标题样式 */
+      .controls h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="rain"></canvas>
+
+    <!-- 配置面板 -->
+    <div class="controls">
+      <h3>代码雨设置</h3>
+      <label>
+        颜色:
+        <input type="color" id="color-picker" value="#0F0" />
+      </label>
+      <label>
+        字符集:
+        <select id="char-set">
+          <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()">默认</option>
+          <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">字母</option>
+          <option value="0123456789">数字</option>
+        </select>
+      </label>
+      <label class="range-container">
+        速度:
+        <input type="range" id="speed-range" min="5" max="50" value="30" />
+        <span id="speed-value">30</span> 毫秒
+      </label>
+      <label class="range-container">
+        字体大小:
+        <input type="range" id="font-size-range" min="10" max="30" value="16" />
+        <span id="font-size-value">16</span> px
+      </label>
+      <label class="range-container">
+        字符密度:
+        <input type="range" id="density-range" min="1" max="3" value="2" />
+        <span id="density-value">2</span>
+      </label>
+    </div>
+
+    <script>
+      // 获取 Canvas 元素和 2D 绘图上下文
+      const canvas = document.getElementById('rain')
+      const ctx = canvas.getContext('2d')
+
+      // 初始化默认配置
+      let config = {
+        color: '#0F0', // 默认颜色
+        charSet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()', // 默认字符集
+        speed: 30, // 默认速度
+        fontSize: 16, // 默认字体大小
+        density: 2, // 默认字符密度
+      }
+
+      // 设置 canvas 大小为屏幕大小
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+
+      // 根据屏幕宽度和字体大小计算列数
+      const updateCanvasSettings = () => {
+        // 根据字体大小和密度调整列数
+        const spacing = config.fontSize / config.density // 字符间隔
+        const columns = Math.floor(canvas.width / spacing) // 计算列数
+        return columns
+      }
+
+      // 计算列数和初始化
+      let columns = updateCanvasSettings()
+
+      // 用于存储每一列的“雨滴”位置
+      let drops = Array(columns).fill(0)
+
+      // 获取配置面板的 DOM 元素
+      const colorPicker = document.getElementById('color-picker')
+      const charSetSelect = document.getElementById('char-set')
+      const speedRange = document.getElementById('speed-range')
+      const fontSizeRange = document.getElementById('font-size-range')
+      const densityRange = document.getElementById('density-range')
+      const speedValue = document.getElementById('speed-value')
+      const fontSizeValue = document.getElementById('font-size-value')
+      const densityValue = document.getElementById('density-value')
+
+      // 监听配置面板的变化
+      colorPicker.addEventListener('input', (e) => {
+        config.color = e.target.value
+      })
+
+      charSetSelect.addEventListener('change', (e) => {
+        config.charSet = e.target.value
+      })
+
+      speedRange.addEventListener('input', (e) => {
+        config.speed = parseInt(e.target.value)
+        speedValue.textContent = config.speed
+      })
+
+      fontSizeRange.addEventListener('input', (e) => {
+        config.fontSize = parseInt(e.target.value)
+        fontSizeValue.textContent = config.fontSize
+        // 更新列数和字符间隔
+        columns = updateCanvasSettings()
+        drops = Array(columns).fill(0) // 重新初始化每列的雨滴位置
+      })
+
+      densityRange.addEventListener('input', (e) => {
+        config.density = parseInt(e.target.value)
+        densityValue.textContent = config.density
+        // 更新列数和字符间隔
+        columns = updateCanvasSettings()
+        drops = Array(columns).fill(0) // 重新初始化每列的雨滴位置
+      })
+
+      // 绘制代码雨的函数
+      function draw() {
+        // 设置背景色和透明度
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        // 设置字符颜色
+        ctx.fillStyle = config.color
+        ctx.font = `${config.fontSize}px monospace`
+
+        // 计算字符间隔
+        const spacing = config.fontSize / config.density
+
+        // 循环绘制每一列的字符
+        for (let i = 0; i < columns; i++) {
+          const char = config.charSet[Math.floor(Math.random() * config.charSet.length)]
+          ctx.fillText(char, i * spacing, drops[i] * config.fontSize)
+
+          // 更新每一列的雨滴位置
+          if (drops[i] * config.fontSize > canvas.height || Math.random() > 0.975) {
+            drops[i] = 0
+          }
+          drops[i]++
+        }
+
+        // 使用 requestAnimationFrame 实现流畅的动画
+        setTimeout(() => {
+          requestAnimationFrame(draw)
+        }, config.speed)
+      }
+
+      // 初始化绘制
+      draw()
+    </script>
+  </body>
+</html>
