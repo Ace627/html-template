@@ -14,3 +14,4 @@
 ## 职场百科
 
 - [跨境小白 - 跨境电商公司评价网](https://kjxb.org)
+- [中国高等教育学生信息网](https://my.chsi.com.cn/archive/index.jsp)
