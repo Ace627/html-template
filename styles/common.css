@@ -67,3 +67,29 @@
 .fw-bold {
   font-weight: bold;
 }
+
+.fixed {
+  position: fixed;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.sticky {
+  position: sticky;
+}
+.position-center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.position-x-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.position-y-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
