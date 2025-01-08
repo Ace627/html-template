@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>JavaScript Observer 实现懒加载</title>
+    <link rel="stylesheet" href="../../styles/reset.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="card-list"></div>
+
+    <script>
+      // 配置项
+      const TOTAL_ITEMS = 99 // 总的图片数量
+      const DEFAULT_IMG = './img/default.jpg' // 默认占位图路径
+      const IMG_URL_TEMPLATE = (index) => `https://picsum.photos/400/600?r=${index}` // 动态图片路径模板
+
+      const cardList = document.querySelector('.card-list')
+
+      /**
+       * 生成图片卡片
+       */
+      function generateItems() {
+        const fragment = document.createDocumentFragment() // 使用文档片段提升 DOM 操作性能
+        for (let i = 0; i < TOTAL_ITEMS; i++) {
+          const div = document.createElement('div')
+          div.classList.add('item')
+          const img = document.createElement('img')
+          img.src = DEFAULT_IMG // 设置默认图片
+          img.dataset.src = IMG_URL_TEMPLATE(i) // 设置懒加载图片路径
+          img.alt = `Image ${i + 1}`
+          div.appendChild(img)
+          fragment.appendChild(div)
+        }
+        cardList.appendChild(fragment) // 一次性将所有元素插入 DOM
+      }
+
+      /**
+       * 初始化 Intersection Observer
+       */
+      function initLazyLoad() {
+        const observer = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return // 跳过未进入视口的元素
+              const img = entry.target
+              img.src = img.dataset.src // 加载真实图片
+              observer.unobserve(img) // 停止观察已经加载的图片
+            })
+          },
+          {
+            threshold: 0.01, // 设置交叉阈值，极小值确保触发回调
+          },
+        )
+
+        // 观察所有带有 data-src 属性的图片
+        document.querySelectorAll('img[data-src]').forEach((img) => observer.observe(img))
+      }
+
+      // 执行主逻辑
+      generateItems()
+      initLazyLoad()
+    </script>
+  </body>
+</html>
