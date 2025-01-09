@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CSS 3D 标签云</title>
+    <style>
+      :root {
+        --margin-left: 0;
+        --margin-top: 0;
+        --animation-duration: 0s;
+        --animation-delay: 0s;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        user-select: none;
+        display: grid;
+        place-items: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: #262935;
+        /* 设置视距 */
+        perspective: 1500px;
+        overflow: hidden;
+        will-change: transform, opacity;
+      }
+      div {
+        /* 所有 div 默认开启 3D 属性 */
+        transform-style: preserve-3d;
+      }
+      .word-box,
+      .word {
+        position: absolute;
+        animation: rotY 0s linear infinite;
+        /* 设置动画时长 */
+        animation-duration: var(--animation-duration);
+        /* 设置动画延时 */
+        animation-delay: var(--animation-delay);
+      }
+      .word-box {
+        margin-top: var(--margin-top);
+      }
+      .word {
+        height: 300px;
+        margin-left: var(--margin-left);
+        font-size: 16px;
+        writing-mode: vertical-lr;
+        white-space: nowrap;
+        animation-direction: reverse;
+        letter-spacing: 2px;
+      }
+
+      @keyframes rotY {
+        to {
+          /* 1turn 表示1圈 */
+          transform: rotateY(1turn);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script>
+      const container = document.querySelector('.container')
+
+      const poemList = [
+        '待到秋来九月八，马踏东京赏樱花',
+        '欲买桂花同载酒，终不似，少年游',
+        '醉后不知天在水，满船清梦压星河',
+        '莫愁前路无知己，天下谁人不识君',
+        '应是天仙狂醉，乱把白云揉碎！',
+        '山重水复疑无路，柳暗花明又一村',
+        '衣带渐宽终不悔，为伊消得人憔悴',
+        '春风得意马蹄疾，一日看尽长安花',
+        '人生自古谁无死，留取丹心照汗青',
+        '满堂花醉三千客，一剑霜寒十四州',
+        '男儿何不带吴钩，收取关山五十州',
+        '醉卧沙场君莫笑，古来征战几人回',
+        '我见青山多妩媚，料青山，见我应如是',
+        '春风得意马蹄疾，不信人间有别离',
+        '须知少年凌云志，曾许人间第一流',
+        '想当年，金戈铁马，气吞万里如虎',
+        '纵有狂风拔地起，我亦乘风破万里',
+        '直道相思了无益，未妨惆怅是清狂',
+        '大鹏一日同风起，扶摇直上九万里',
+        '仰天大笑出门去，我辈岂是蓬蒿人',
+        '天子呼来不上船，自称臣是酒中仙',
+        '梦里不知身是客，一晌贪欢',
+        '人似秋鸿来有信，事如春梦了无痕',
+        '最是人间留不住，朱颜辞镜花辞树',
+        '萧瑟秋风今又是，换了人间',
+        '埋骨何须桑梓地，人生无处不青山',
+        '寄蜉蝣于天地，渺沧海之一粟',
+        '明月几时有把酒问青天',
+        '小舟从此逝，江海寄余生',
+        '此曲只应天上有，人间能得几回闻',
+        '出师未捷身先死，长使英雄泪满襟',
+        '飞流直下三千尺，疑是银河落九天',
+        '举杯邀明月，对影成三人',
+        '十步杀一人，千里不留行',
+        '托身白刃里，杀人红尘中',
+        '直道相思了无益，未妨惆怅是清狂',
+        '我本桀骜少年臣，不信鬼神不信人',
+        '青山一道同云雨，明月何曾是两乡',
+        '一身转战三千里，一剑曾当百万师',
+        '同是天涯沦落人，相逢何必曾相识',
+        '天街小雨润如酥，草色遥看近却无',
+      ]
+
+      // 生成指定范围内的随机数（保留两位小数）
+      function getRandomNumber(min, max) {
+        return (Math.random() * (max - min + 1) + min).toFixed(2)
+      }
+
+      // 初始化函数
+      function init() {
+        const fragment = document.createDocumentFragment()
+        poemList.forEach((v, i) => {
+          const word_box = document.createElement('div')
+          const word = document.createElement('div')
+          word.innerText = v
+          word.classList.add('word')
+          word.style.color = `hsl(${getRandomNumber(0, 240)}, 100%, 65%)`
+          word_box.classList.add('word-box')
+          word_box.style.setProperty('--margin-top', `${Math.min(getRandomNumber(-40, 10), 40)}vh`)
+          word_box.style.setProperty('--margin-left', `${getRandomNumber(6, 30)}vw`)
+          word_box.style.setProperty('--animation-duration', `${getRandomNumber(8, 20)}s`)
+          word_box.style.setProperty('--animation-delay', `${getRandomNumber(-20, 0)}s`)
+          word_box.appendChild(word)
+          fragment.appendChild(word_box)
+        })
+        container.appendChild(fragment)
+      }
+
+      init()
+    </script>
+  </body>
+</html>
