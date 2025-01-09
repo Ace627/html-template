@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <!-- 定义当前 HTML 页面所使用的字符集 -->
+    <meta charset="UTF-8" />
+    <!-- 针对 IE 浏览器的一个特殊配置，含义是让 IE 浏览器以最高的渲染级别来渲染页面 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- 开启理想视口，并禁用缩放功能，强制文档与设备的宽度保持 1:1 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HTML 小米商品卡片</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-size: inherit;
+        font-weight: inherit;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+      .card {
+        width: 234px;
+        height: 300px;
+        margin: 16px;
+        padding: 20px 0;
+        border-radius: 4px;
+        text-align: center;
+        transition: all 0.2s linear;
+        background-color: #fff;
+      }
+      .card img {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 18px;
+      }
+
+      .card .title {
+        margin: 0 10px 4px;
+        color: #333;
+      }
+      .desc {
+        margin: 0 10px 10px;
+        height: 18px;
+        font-size: 12px;
+        color: #b0b0b0;
+      }
+      .price {
+        margin: 0 10px 14px;
+        color: #ff6700;
+      }
+      .card:hover {
+        cursor: pointer;
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 15px 30px rgb(0 0 0 / 10%);
+      }
+
+      /* 单行文本溢出显示省略号 */
+      .text-ellipsis {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/nr-pub/202305241112_ecb14876904f09f3cbc605350a02eff0.png?thumb=1&w=200&h=200&f=webp&q=90" alt="cover" />
+      <h3 class="title text-ellipsis">Xiaomi Civi 3</h3>
+      <div class="desc text-ellipsis">仿生双眸 天生出色</div>
+      <div class="price">
+        <span class="num">2499</span>
+        <span>元起</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/50b73aeedeeb27392a15d9d479e5d793.png?thumb=1&w=200&h=200&f=webp&q=90" alt="cover" />
+      <h3 class="title text-ellipsis">Redmi G 游戏本 2022</h3>
+      <div class="desc text-ellipsis">16英寸 2.5K 165Hz 电竞大屏</div>
+      <div class="price">
+        <span class="num">7499</span>
+        <span>元起</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/555070388ddc76c4de4b2c42b12c3c1d.png?thumb=1&w=200&h=200&f=webp&q=90" alt="cover" />
+      <h3 class="title text-ellipsis">Xiaomi 13 Ultra</h3>
+      <div class="desc text-ellipsis">徕卡光学全焦段四摄| 一英寸可变光圈| 徕卡专业街拍模式</div>
+      <div class="price">
+        <span class="num">5999</span>
+        <span>元起</span>
+      </div>
+    </div>
+  </body>
+</html>

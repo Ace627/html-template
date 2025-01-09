@@ -18,4 +18,4 @@
 - [中国高等教育学生信息网](https://my.chsi.com.cn/archive/index.jsp)
 - [中国研究生招生信息网](https://yz.chsi.com.cn)
 - [中国教育在线考研频道](https://kaoyan.eol.cn)
-- [考研论坛\_考研人的精神家园！](http://bbs.kaoyan.com)
+- [考研论坛 - 考研人的精神家园！](http://bbs.kaoyan.com)
