@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>JavaScript 放大镜效果</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        padding: 120px;
+        background-color: #f5f6f7;
+      }
+
+      .magnifier {
+        --small-box-size: 300px;
+        position: relative;
+      }
+
+      .img--small {
+        width: var(--small-box-size);
+        height: var(--small-box-size);
+        background-image: url('./img/img--small.png');
+        background-size: cover;
+        position: relative;
+      }
+
+      .mask {
+        cursor: move;
+        position: absolute;
+        display: none;
+        width: 100px;
+        height: 100px;
+        background-color: rgba(255, 0, 0, 0.32);
+      }
+
+      .img--large {
+        position: absolute;
+        left: calc(var(--small-box-size) + 16px);
+        top: 0;
+        display: none;
+        width: var(--small-box-size);
+        height: var(--small-box-size);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .img--large img {
+        position: absolute;
+        width: calc(var(--small-box-size) * 3);
+        height: calc(var(--small-box-size) * 3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="magnifier">
+      <div class="img--small">
+        <div class="mask"></div>
+      </div>
+      <div class="img--large">
+        <img src="./img/img--large.png" alt="大图" draggable="false" />
+      </div>
+    </div>
+
+    <script>
+      // 获取元素
+      const magnifierBox = document.querySelector('.magnifier')
+      const smallImgBox = document.querySelector('.img--small')
+      const maskBox = document.querySelector('.mask')
+      const largeImgBox = document.querySelector('.img--large')
+      const largeImg = document.querySelector('.img--large img')
+
+      const scale = 3 // 放大倍数
+
+      // 鼠标移入时，显示蒙版和大图
+      smallImgBox.addEventListener('mouseenter', () => {
+        maskBox.style.display = 'block'
+        largeImgBox.style.display = 'block'
+      })
+
+      // 鼠标移出时，隐藏蒙版和大图
+      smallImgBox.addEventListener('mouseleave', () => {
+        maskBox.style.display = 'none'
+        largeImgBox.style.display = 'none'
+      })
+
+      // 鼠标移动时，计算蒙版和大图位置
+      smallImgBox.addEventListener('mousemove', (event) => {
+        const { left, top, width, height } = smallImgBox.getBoundingClientRect()
+
+        // 计算蒙版位置，使其保持在小图区域内
+        let maskX = event.clientX - left - maskBox.offsetWidth / 2
+        let maskY = event.clientY - top - maskBox.offsetHeight / 2
+        maskX = Math.max(0, Math.min(maskX, width - maskBox.offsetWidth))
+        maskY = Math.max(0, Math.min(maskY, height - maskBox.offsetHeight))
+
+        // 设置蒙版位置
+        maskBox.style.transform = `translate(${maskX}px, ${maskY}px)`
+
+        // 设置大图位置，反向移动
+        largeImg.style.transform = `translate(${-maskX * scale}px, ${-maskY * scale}px)`
+      })
+    </script>
+  </body>
+</html>
