@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript 鸡兔同笼解题器</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🐔 鸡兔同笼解题器 🐇</h1>
+
+      <div class="control-panel">
+        <div class="input-group">
+          <label class="input-label">问题类型</label>
+          <select id="problemType" onchange="changeInputs()">
+            <option value="standard">标准问题（总头数 + 总脚数）</option>
+            <option value="difference">差数问题（头数与脚数差）</option>
+            <option value="known_animal">已知某种动物数量</option>
+          </select>
+        </div>
+
+        <div id="inputArea">
+          <!-- 动态输入区域 -->
+        </div>
+
+        <div class="button-container">
+          <button onclick="calculate()">开始推演</button>
+        </div>
+
+        <div class="result-container">
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>
