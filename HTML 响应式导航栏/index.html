@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>HTML 响应式导航栏</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="header__logo">
+        <a href="https://github.com/Ace627/html-template">
+          <span>流星技术有限科技公司</span>
+        </a>
+      </h1>
+
+      <nav class="header__nav">
+        <a href="javascript:;">首页</a>
+        <a href="javascript:;">集团介绍</a>
+        <a href="javascript:;">商业模式</a>
+        <a href="javascript:;">授权查询</a>
+        <a href="javascript:;">咨询中心</a>
+        <a href="javascript:;">加入我们</a>
+        <a href="javascript:;">联系我们</a>
+      </nav>
+
+      <!-- 汉堡菜单 -->
+      <div class="hamburger">
+        <div class="hamburger__line"></div>
+        <div class="hamburger__line"></div>
+        <div class="hamburger__line"></div>
+      </div>
+    </div>
+
+    <script>
+      const hamburgerBtn = document.querySelector('.hamburger')
+      const headerNavbarContainer = document.querySelector('.header')
+
+      hamburgerBtn.addEventListener('click', toggleSidebar)
+      function toggleSidebar() {
+        headerNavbarContainer.classList.toggle('hamburger-active')
+      }
+    </script>
+  </body>
+</html>

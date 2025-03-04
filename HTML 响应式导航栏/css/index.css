@@ -1,0 +1,101 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  --app-header-height: 64px; /* 布局头部的高度 */
+  --app-header-bg-color: #262935;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('https://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/113/113-bigskin-4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header {
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--app-header-height);
+  padding: 0 8px;
+  background-color: var(--app-header-bg-color);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+.header a {
+  color: #fff;
+  text-decoration: none;
+}
+.header .header__logo {
+  flex-shrink: 0;
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.header .header__nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  transform-origin: center top;
+}
+.header .header__nav a {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.32s;
+}
+.header .header__nav a:hover {
+  background-color: rgba(255, 255, 255, 0.32);
+}
+
+/* 汉堡菜单 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.hamburger .hamburger__line {
+  width: 26px;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.32s ease-out;
+}
+.hamburger-active .hamburger__line:nth-child(1) {
+  transform: translateY(9px) rotate(-45deg);
+}
+.hamburger-active .hamburger__line:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-active .hamburger__line:nth-child(3) {
+  transform: translateY(-9px) rotate(45deg);
+}
+
+/* 移动端断点 */
+@media screen and (max-width: 992px) {
+  .hamburger {
+    display: inline-flex;
+  }
+
+  .header .header__nav {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px;
+    transform: scaleY(0);
+    background-color: var(--app-header-bg-color);
+    transition: all 0.16s ease;
+  }
+  .header.hamburger-active .header__nav {
+    display: flex;
+    transform: scaleY(1);
+  }
+}
