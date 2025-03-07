@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    // 设定编译后的 JavaScript 文件使用的模块化方案
+    "module": "ESNext",
+    // 模块解析策略，是指编译器在查找导入模块内容时所遵循的流程
+    "moduleResolution": "bundler",
+    // 兼容 CommonJS 的模块导入方式 避免 * as xx 的导入
+    "esModuleInterop": true,
+    // 解析非相对模块名的基准目录
+    "baseUrl": "./",
+    // 模块名到基于 baseUrl 的路径映射的列表
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "types/**/*.d.ts"]
+}
