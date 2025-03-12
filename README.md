@@ -19,3 +19,7 @@
 - [中国研究生招生信息网](https://yz.chsi.com.cn)
 - [中国教育在线考研频道](https://kaoyan.eol.cn)
 - [考研论坛 - 考研人的精神家园！](http://bbs.kaoyan.com)
+
+## GitHub 开源项目
+
+- [程序员在家做饭方法指南](https://github.com/Anduin2017/HowToCook)
