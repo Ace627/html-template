@@ -1,0 +1,290 @@
+.sunui-color-container,
+.sunui-color-container div,
+.sunui-color-container span {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sunui-color-container {
+  position: relative;
+  border: 0 none;
+  background-color: #565656;
+  width: 420px;
+  height: 280px;
+  margin: 50px 0 0 50px;
+  font-family: 'Microsoft YaHei', '微软雅黑', serif;
+  color: #ffffff;
+  cursor: default;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+.sunui-color-container .sunui-color-area {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 256px;
+  height: 256px;
+  background-color: #00ff00;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-area div {
+  height: 2px;
+  border: 0 none;
+  display: block;
+  position: static;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-area .sunui-color-area-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 256px;
+  height: 256px;
+}
+.sunui-color-container .sunui-color-area .sunui-color-area-point {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  display: block;
+  left: 255px;
+  top: 0;
+  margin-left: -6px;
+  margin-top: -6px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  background: none;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-index,
+.sunui-color-container .sunui-color-index .sunui-color-index-layer {
+  position: absolute;
+  left: 284px;
+  top: 12px;
+  width: 18px;
+  height: 257px;
+}
+.sunui-color-container .sunui-color-index .sunui-color-index-layer {
+  left: 0;
+  top: 0;
+}
+.sunui-color-container .sunui-color-index .sunui-color-bar-container {
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 42px;
+  height: 16px;
+  margin-top: -8px;
+}
+.sunui-color-container .sunui-color-index .sunui-color-bar-container .sunui-color-bar {
+  position: absolute;
+  top: 4px;
+  width: 0;
+  height: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  _width: 6px;
+  _height: 8px;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-index .sunui-color-bar-container .sunui-color-bar-left {
+  left: 4px;
+  border-left: 6px solid #ffffff;
+  border-right: 0 none;
+}
+.sunui-color-container .sunui-color-index .sunui-color-bar-container .sunui-color-bar-right {
+  right: 4px;
+  border-right: 6px solid #ffffff;
+  border-left: 0 none;
+}
+.sunui-color-container .sunui-color-index .sunui-color-red2pink {
+  height: 43px;
+  background: linear-gradient(to bottom, #ff0000, #ff00ff);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FF0000,endColorStr=#FF00FF,gradientType=0);
+}
+.sunui-color-container .sunui-color-index .sunui-color-pink2blue {
+  height: 43px;
+  background: linear-gradient(to bottom, #ff00ff, #0000ff);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FF00FF,endColorStr=#0000FF,gradientType=0);
+}
+.sunui-color-container .sunui-color-index .sunui-color-blue2cyan {
+  height: 43px;
+  background: linear-gradient(to bottom, #0000ff, #00ffff);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#0000FF,endColorStr=#00FFFF,gradientType=0);
+}
+.sunui-color-container .sunui-color-index .sunui-color-cyan2green {
+  height: 43px;
+  background: linear-gradient(to bottom, #00ffff, #00ff00);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#00FFFF,endColorStr=#00FF00,gradientType=0);
+}
+.sunui-color-container .sunui-color-index .sunui-color-green2yellow {
+  height: 43px;
+  background: linear-gradient(to bottom, #00ff00, #ffff00);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#00FF00,endColorStr=#FFFF00,gradientType=0);
+}
+.sunui-color-container .sunui-color-index .sunui-color-yellow2red {
+  height: 43px;
+  background: linear-gradient(to bottom, #ffff00, #ff0000);
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFF00,endColorStr=#FF0000,gradientType=0);
+}
+.sunui-color-container .sunui-color-rgb-container {
+  position: absolute;
+  left: 318px;
+  top: 12px;
+  background: none;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #404040;
+  margin: 20px 0;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-text {
+  position: absolute;
+  left: 0;
+  width: 68px;
+  height: 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-text-new {
+  top: -20px;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-text-current {
+  bottom: -20px;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-web-safe {
+  position: absolute;
+  right: -22px;
+  bottom: 12px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #404040;
+  background: #ffffff;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-web-safe div {
+  height: 100%;
+  border: 1px solid #ffffff;
+  background: #999999;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 50%;
+  background-color: #ffffff;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show-new {
+  background-color: #0000ff;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show-current {
+  background: none;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show .empty-color {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  background: none;
+  width: 0;
+  height: 0;
+  _width: 68px;
+  _height: 32px;
+  overflow: hidden;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show .empty-color-up {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top: 16px solid #ffffff;
+  border-right: 34px solid #ffffff;
+  border-left: 34px solid transparent;
+  border-bottom: 16px solid transparent;
+  _border-top: 16px solid #ffffff;
+  _border-right: 35px solid #ffffff;
+  _border-left: 35px solid transparent;
+  _border-bottom: 16px solid transparent;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-show-container .sunui-color-show .empty-color-down {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 16px solid transparent;
+  border-right: 34px solid transparent;
+  border-left: 34px solid #ffffff;
+  border-bottom: 16px solid #ffffff;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-rgb {
+  height: 20px;
+  background: none;
+  font-size: 14px;
+  margin: 4px 0;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-rgb span {
+  display: inline-block;
+  vertical-align: middle;
+  height: 18px;
+  width: 24px;
+  line-height: 18px;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-rgb input {
+  width: 36px;
+  height: 18px;
+  border: 1px solid #666666;
+  background-color: #404040;
+  outline: 0 none;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-0xrgb {
+  height: 20px;
+  background: none;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-0xrgb span {
+  display: inline-block;
+  vertical-align: middle;
+  height: 18px;
+  width: 16px;
+  line-height: 18px;
+}
+.sunui-color-container .sunui-color-rgb-container .sunui-color-0xrgb input {
+  width: 74px;
+  height: 18px;
+  border: 1px solid #666666;
+  background-color: #404040;
+  outline: 0 none;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0;
+}
+.sunui-color-container .sunui-color-sure {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 88px;
+  height: 28px;
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 27px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
