@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>元宵猜灯谜</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <div class="lantern-container">
+      <div class="lantern">
+        <div class="lantern-body"></div>
+        <div class="lantern-tassel"></div>
+      </div>
+      <h1 class="title">元宵灯谜会</h1>
+    </div>
+
+    <div class="game-container">
+      <div class="puzzle-box">
+        <div class="difficulty-selector">
+          <button class="difficulty-btn active" data-level="1">初入江湖</button>
+          <button class="difficulty-btn" data-level="2">渐入佳境</button>
+          <button class="difficulty-btn" data-level="3">炉火纯青</button>
+        </div>
+
+        <div class="puzzle-content">
+          <p class="puzzle-text"></p>
+          <div class="input-group">
+            <input type="text" class="answer-input" placeholder="输入你的答案" />
+            <button class="submit-btn">揭晓谜底</button>
+          </div>
+          <div class="score-board">
+            <span>当前积分：<span id="score">0</span></span>
+            <span>剩余时间：<span id="timer">60</span>秒</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
