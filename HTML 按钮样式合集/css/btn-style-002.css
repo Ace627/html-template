@@ -1,0 +1,23 @@
+.btn-style-002 {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-color: #fff;
+  background-image: linear-gradient(to right, #fff, #fff), linear-gradient(180deg, rgba(48, 170, 255, 1), rgba(201, 157, 255, 1));
+  box-shadow: 0 0 10px 0 rgba(64, 67, 85, 0.05);
+}
+.btn-style-002 span {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #2babff 0%, #5fa0ff 48%, #cb9dff 100%);
+}
